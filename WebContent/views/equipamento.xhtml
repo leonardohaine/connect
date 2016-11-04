@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="inicial.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formEquip" enctype="multipart/form-data">
+        <p:panelGrid  id="panelEquip" style="margin-top:5px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE EQUIPAMENTO</p:spacer>
+		        </p:column>
+		    </p:row>  
+        </f:facet>
+        
+        <p:row>
+            <p:column colspan="2">Id:<br/><p:inputText size="25" value="#{equipamento.equipamento.equipamento}" /></p:column>
+            
+            <p:column colspan="2">Nome:<br/><p:inputText size="25" value="#{equipamento.equipamento.descricao}" /></p:column>  
+        
+            <p:column colspan="2">Empresa:<br/><p:inputText  id="senha" size="25" value="#{equipamento.equipamento.empresa}"/></p:column>
+            
+            <p:column colspan="2">Conexão:
+				<p:selectOneRadio label="Tipo" value="#{equipamento.equipamento.tipocomunicacao}" >
+		            <f:selectItem itemLabel="Serial" itemValue="S"  />
+		            <f:selectItem itemLabel="TCP/IP" itemValue="I" />
+		        </p:selectOneRadio>
+			</p:column>
+        </p:row>
+        <p:row>  
+            <p:column colspan="2">Data Bits:<br/>
+				<p:selectOneMenu id="dataBits" value="#{equipamento.equipamento.nbits}" style="width:55px">
+					<f:selectItem itemLabel="" itemValue="" />
+		            <f:selectItem itemLabel="7" itemValue="7" />
+		            <f:selectItem itemLabel="8" itemValue="8" />
+		        </p:selectOneMenu>
+			</p:column>
+            
+            <p:column colspan="2">Paridade:<br/>
+				<p:selectOneMenu id="Paridade" value="#{equipamento.equipamento.flowcontrol}" style="width:55px">
+					<f:selectItem itemLabel="" itemValue="" />
+		            <f:selectItem itemLabel="NÃO" itemValue="NAO" />
+		            <f:selectItem itemLabel="PAR" itemValue="PAR" />
+		            <f:selectItem itemLabel="IMPAR" itemValue="IMPAR" />
+		        </p:selectOneMenu>
+			</p:column>
+            
+            <p:column colspan="2">Stop Bits:<br/>
+				<p:selectOneMenu id="stopBits" value="#{equipamento.equipamento.stopbits}" style="width:55px">
+					<f:selectItem itemLabel="" itemValue="" />
+		            <f:selectItem itemLabel="1" itemValue="1" />
+		            <f:selectItem itemLabel="2" itemValue="2" />
+		        </p:selectOneMenu>
+			</p:column>
+            
+            <p:column colspan="2">Velocidade:<br/>
+				<p:selectOneMenu id="velocidade" value="#{equipamento.equipamento.boundrate}" style="width:55px">
+					<f:selectItem itemLabel="" itemValue="" />
+		            <f:selectItem itemLabel="110" itemValue="110" />
+		            <f:selectItem itemLabel="300" itemValue="300" />
+		            <f:selectItem itemLabel="600" itemValue="600" />
+		            <f:selectItem itemLabel="1200" itemValue="1200" />
+		            <f:selectItem itemLabel="4800" itemValue="4800" />
+		            <f:selectItem itemLabel="9600" itemValue="9600" />
+		            <f:selectItem itemLabel="19200" itemValue="19200" />
+		            <f:selectItem itemLabel="38400" itemValue="38400" />
+		        </p:selectOneMenu>
+			</p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">IP:<br/><p:inputText size="25" value="#{equipamento.equipamento.ip}" /></p:column>
+            
+            <p:column colspan="6">Porta:<br/><p:inputText size="25" value="#{equipamento.equipamento.porta}" /></p:column>
+        </p:row>
+        <p:row>   
+            <p:column colspan="2">Número serie:<br/><p:inputText size="25" value="#{equipamento.equipamento.numeroserie}" /></p:column>
+            
+            <p:column colspan="2">Setor:<br/>
+            	<p:selectOneMenu id="setor" value="#{equipamento.equipamento.setor}" style="width:55px">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{setor.setores}" var="set" itemLabel="#{set.descricao}" itemValue="#{set.setor}" />
+		        </p:selectOneMenu>
+            </p:column>
+            
+            <p:column colspan="4">Ativo: <p:selectBooleanButton value="#{equipamento.equipamento.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+        </p:row>
+        <p:row>
+        	<p:column colspan="8">Anotação:<br/><p:inputTextarea rows="5" cols="135"  /></p:column>
+        </p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+                <p:button value="Cancelar" icon="icone-cancel" outcome="listaEquipamento" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{equipamento.save}" update="panelEquip" global="true" />
+                
+                <p:focus context="panelEquip"/>  
+                <p:messages id="messagesEquip" showDetail="true" autoUpdate="true" closable="true" />
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelEquip" trigger="saveBtn" /> 
+    </h:form>
+    
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

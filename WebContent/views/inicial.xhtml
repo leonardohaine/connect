@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/imagens/favicon.ico"/>
+	<title> :: Connect Lab :: Sistema de Gestão Laboratorial</title>
+</h:head>
+<h:body >
+	
+	<p:growl id="messages" />
+	<p:layout fullPage="true" gutter="0" styleClass="backLayout" >
+		<p:layoutUnit position="north" size="70" resizable="false" gutter="0" style="background: darkblue;"
+			closable="false" collapsible="true">
+			
+			<div align="center" style="border: 0px solid red; height: 55px;">
+				<div align="left" style="float: left; border:0px solid;">
+					<h:form id="formLink">
+						<p:link onclick="PF('unidade').show(); return false;" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;">
+							UNIDADE: 
+							<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.hospital.cnpj}"></p:inputText>
+							<p:outputLabel id="uni" value="#{unidade.hospital.fantasia}" /><br/>
+							CNPJ: 
+							<p:outputLabel id="cnp"  value="#{unidade.hospital.cnpj}" ><f:convertNumber pattern="##.###.###/####-##" locale="pl_PL"/></p:outputLabel>
+						</p:link>
+					</h:form>
+				</div>
+				<div align="center" style="float: center; height: 40px; border: 0px solid white;">
+					<font style="font-size: 35px; text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;" color="white">
+					:: Connect Lab :: Sistema de Gestão Laboratorial 
+					</font>
+				
+					<div align="center" style="float: right; border: 0px solid white;">
+						<p:graphicImage value="../imagens/icone-usuario.png" width="40" height="40" /><br/>
+						#{auth.user}
+					</div>	
+				
+				</div>
+				
+			</div>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="28" resizable="false" gutter="0" maxSize="67" style="background-color: darkblue; overflow: hidden;"
+			closable="false" collapsible="true">
+			<div class="container" >
+			   <div style="float: left; width: 33%;"><p:clock pattern="dd/MM/yyyy - HH:mm:ss" mode="server" /></div>
+			   <div style="float: right; width: 33%;" align="right">
+				   <p:outputLabel value="Copyright © 2016, Connect Line. Todos os direitos reservados.     " />
+	           </div>
+			   <div style="display: inline-block; width: 34%;" align="center">
+			   		<p:ajaxStatus style="width:128px;height:5px;" id="ajaxStatusPanel">  
+			           <f:facet name="start">  
+			               <h:graphicImage value="../imagens/30.gif" />  
+			           </f:facet>  
+			
+			           <f:facet name="complete">  
+			               <h:outputText value="" />  
+			           </f:facet>  
+		           </p:ajaxStatus>
+			   </div>
+			</div>
+			
+		</p:layoutUnit>
+		<p:layoutUnit position="west" size="210" resizable="false" gutter="0"
+			closable="false" collapsible="true" effect="drop">
+			<ui:include src="menu.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center" gutter="0">
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+	</p:layout>
+	
+	<h:form>
+	<p:dialog header="ESCOLHA UNIDADE" widgetVar="unidade" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
+	
+		<p:dataTable var="hos" value="#{unidade.listHospital}" >
+                <f:facet name="header">
+                	UNIDADES
+                </f:facet>
+ 
+                <p:column headerText="Cnpj">
+                    <h:outputText value="#{hos.cnpj}" />
+                </p:column>
+ 
+                <p:column headerText="Unidade">
+                    <h:outputText value="#{hos.fantasia}" />
+                </p:column>
+ 
+                <p:column style="width:32px;text-align: center">
+                    <p:commandButton icon="ui-icon-check" oncomplete="PF('unidade').hide()" 
+                    		actionListener="#{unidade.selectHospFromDialog(hos)}" update=":formLink" />
+                </p:column>
+            </p:dataTable>
+	
+	</p:dialog>
+	</h:form>
+	
+</h:body>
+</html>

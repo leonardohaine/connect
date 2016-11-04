@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<h:form id="formMenu">
+		<div class="ui-fluid">
+		<p:slideMenu style="width:180px; height: 455px" backLabel="Voltar">
+			<p:menuitem value="Home" url="inicial.jsf"  icon="ui-icon-home" />
+			<p:separator />
+	        <p:submenu label="Cadastro" icon=" ui-icon-check" expanded="true" >
+	        	<p:menuitem icon="ui-icon-bullet" value="Unidade" url="listaHospital.jsf" rendered="true" />
+	        	<p:menuitem icon="ui-icon-bullet" value="Requisição" url="consultaPaciente.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Usuário" url="listaUsuario.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Paciente" url="pacienteLab.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Exame" url="exame.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Material" url="listaMaterial.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Setor" url="listaSetor.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Posto" url="listaPosto.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Recipiente" url="listaRecipiente.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Médico" url="listaMedico.jsf" rendered="true" />
+	            <p:menuitem icon="ui-icon-bullet" value="Equipamento" url="listaEquipamento.jsf" rendered="true" />
+	            
+	        </p:submenu>
+	        <p:submenu label="Controle" icon=" ui-icon-check" rendered="true">
+	            <p:menuitem value="Controle Material" url="controleMaterial.jsf" />
+	            <p:menuitem value="" url="" update="" />
+	        </p:submenu>
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:menuitem value=""   />
+	        <p:separator />
+	        <p:menuitem icon="fa fa-sign-out" value="Sair" actionListener="#{auth.logout}" />
+	    </p:slideMenu>
+	  </div>  
+	</h:form>
+</h:body>
+</html>
